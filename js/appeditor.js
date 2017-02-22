@@ -36,19 +36,18 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
         fabric.Object.prototype.set({
             hoverCursor: 'pointer',
             transparentCorners: false,
-            borderColor: '#2d2d2d',
-            cornerColor: '#337ab7',
-            selectionBorderColor: '#ccc'
+            borderColor: 'rgba(102,153,255,0.5)',
+            cornerColor: 'rgba(102,153,255,0.5)',
         });
 
         var mov = false;
         canvas.on({
             'mouse:out': function(e) {
-                console.log("mouse:out");
+                //console.log("mouse:out");
                 mov = false;
             },
             'mouse:over': function(e) {
-                console.log("mouse:over");
+                //console.log("mouse:over");
                 mov = true;
             },
             'object:moving': function(e) {
@@ -127,6 +126,7 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
         });
         canvas.on('object:out', function(e) { //TO DO
         });
+        canvas.selection= false;
 
         $('.language-control').change(function() { //TO DO
         });
@@ -167,11 +167,11 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                 filter = new fabric.Image.filters.StackBlur(10);
             } else if ($that.data('value') == "bright") {
                 filter = new fabric.Image.filters.Brightness({
-                    brightness: 40
+                    brightness: 50
                 });
             } else if ($that.data('value') == "lcontrast") {
                 filter = new fabric.Image.filters.Contrast({
-                    contrast: -50
+                    contrast: -60
                 });
             } else if ($that.data('value') == "scontrast") {
                 filter = new fabric.Image.filters.Contrast({
@@ -205,11 +205,12 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                         scaleY: 1,
                         fontSize: 20,
                         fontWeight: '',
-                        hasRotatingPoint: true
+                        padding: 10,
+                        hasRotatingPoint: false
                     });
+                    textHeader.setControlsVisibility({'mtr': false});
                     textHeader.textAlign = 'center';
                     canvas.add(textHeader);
-                    //canvas.item(canvas.item.length - 1).hasRotatingPoint = true;
                 } else if ($(this).attr('data-value') == 2) {
                     if (textBody != undefined) {
                         return;
@@ -225,11 +226,12 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                         scaleY: 1,
                         fontWeight: '',
                         fontSize: 24,
-                        hasRotatingPoint: true
+                        padding: 10,
+                        hasRotatingPoint: false
                     });
+                    textBody.setControlsVisibility({'mtr': false});
                     textBody.textAlign = 'center';
                     canvas.add(textBody);
-                    //canvas.item(canvas.item.length - 1).hasRotatingPoint = true;
                 } else if ($(this).attr('data-value') == 3) {
                     if (textFooter != undefined) {
                         return;
@@ -246,11 +248,12 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                         fontWeight: '',
                         fontStyle: 'italic',
                         fontSize: 18,
-                        hasRotatingPoint: true
+                        padding: 10,
+                        hasRotatingPoint: false
                     });
+                    textFooter.setControlsVisibility({'mtr': false});
                     textFooter.textAlign = 'right';
                     canvas.add(textFooter);
-                    //canvas.item(canvas.item.length - 1).hasRotatingPoint = true;
                 }
                 $("#texteditor").css('display', 'none');
                 $(this).addClass('active');
@@ -378,6 +381,7 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                     angle: 0,
                     padding: 10,
                     cornersize: 10,
+                    padding: 0,
                     hasRotatingPoint: true,
                     scaleX: sx,
                     scaleY: sy

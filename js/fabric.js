@@ -5803,7 +5803,6 @@ fabric.Pattern = fabric.util.createClass( /** @lends fabric.Pattern.prototype */
         }
 });
 
-
 (function (global) {
 
         'use strict';
@@ -26139,6 +26138,7 @@ fabric.util.object.extend(fabric.IText.prototype, /** @lends fabric.IText.protot
         }
 
 })();
+
 
 /**
  * Stack blur filter for fabricjs
