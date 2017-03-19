@@ -11,6 +11,8 @@ var line2;
 var line3;
 var line4;
 var imgIns;
+var lnX;
+var lnY;
 
 $(document).on("shown.bs.dropdown", ".dropdown", function() {
         // calculate the required sizes, spaces
@@ -36,11 +38,20 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
         fabric.Object.prototype.set({
             hoverCursor: 'pointer',
             transparentCorners: false,
-            borderColor: 'rgba(102,153,255,0.5)',
-            cornerColor: 'rgba(102,153,255,0.5)',
+            borderColor: 'rgba(255,255,255,1)',
+            cornerColor: 'rgba(220,220,220,0.9)',
+            cornerStyle: 'circle',
+            cornerSize: 20
         });
 
         var mov = false;
+        var newleft = 0,
+            edgedetection = 10, //pixels to snap
+            cmdetection = 10,
+            canvasWidth = canvas.width,
+            canvasHeight = canvas.height,
+            canvasCenterWidth = canvas.width / 2,
+            canvasMiddleHeight = canvas.height / 2;
         canvas.on({
             'mouse:out': function(e) {
                 //console.log("mouse:out");
@@ -50,48 +61,75 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                 //console.log("mouse:over");
                 mov = true;
             },
+            'mouse:up': function(e) {
+                console.log("mouse:up");
+                lnY.setVisible(false);
+                lnX.setVisible(false);
+            },
             'object:moving': function(e) {
-                e.target.opacity = 0.5;
-
                 var obj = e.target;
-                // if object is too big ignore
-                if (obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width) {
-                    return;
+                obj.setCoords(); //Sets corner position coordinates based on current angle, width and height
+
+                if (Math.abs(Math.round(obj.getLeft())) < edgedetection) {
+                    obj.setLeft(0);
                 }
-                obj.setCoords();
-                // top-left  corner
-                if (obj.getBoundingRect().top < 0 || obj.getBoundingRect().left < 0) {
-                    obj.top = Math.max(obj.top, obj.top - obj.getBoundingRect().top);
-                    obj.left = Math.max(obj.left, obj.left - obj.getBoundingRect().left);
+
+                if (Math.abs(Math.round(obj.getTop())) < edgedetection) {
+                    obj.setTop(0);
                 }
-                // bot-right corner
-                if (obj.getBoundingRect().top + obj.getBoundingRect().height > obj.canvas.height || obj.getBoundingRect().left + obj.getBoundingRect().width > obj.canvas.width) {
-                    obj.top = Math.min(obj.top, obj.canvas.height - obj.getBoundingRect().height + obj.top - obj.getBoundingRect().top);
-                    obj.left = Math.min(obj.left, obj.canvas.width - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
+
+                if (Math.abs(Math.round(obj.getHeight() / 2 + obj.getTop() - canvasMiddleHeight)) < cmdetection) {
+                    lnY.setVisible(true);
+                    obj.setTop(canvasMiddleHeight - obj.getHeight() / 2);
+                } else {
+                    lnY.setVisible(false);
+                }
+
+
+                if (Math.abs(Math.round(canvasCenterWidth - (obj.getWidth() / 2 + obj.getLeft()))) < cmdetection) {
+                    lnX.setVisible(true);
+                    obj.setLeft(canvasCenterWidth - obj.getWidth() / 2);
+                } else {
+                    lnX.setVisible(false);
+                }
+
+                //console.log(Math.abs(Math.round(obj.getLeft() - edgedetection)));
+                // if ((obj.getWidth() + obj.getLeft()) > (canvasWidth - edgedetection)) {
+                //     obj.setLeft(canvasWidth - obj.getWidth());
+                // }
+
+                if (Math.abs(Math.round(canvasWidth - (obj.getWidth() + obj.getLeft()))) < edgedetection) {
+                    obj.setLeft(canvasWidth - obj.getWidth());
+                }
+
+                if (Math.abs(Math.round(canvasHeight - (obj.getHeight() + obj.getTop()))) < edgedetection) {
+                    obj.setTop(canvasHeight - obj.getHeight());
                 }
             },
             'object:modified': function(e) {
                 e.target.opacity = 1;
             },
             'object:scaling': function(e) {
-                e.target.opacity = 1;
-
                 var obj = e.target;
-                // if object is too big ignore
-                if (obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width) {
-                    return;
+                obj.setCoords(); //Sets corner position coordinates based on current angle, width and height
+
+                if (obj.getLeft() < 0) {
+                    obj.setLeft(0);
                 }
-                obj.setCoords();
-                // top-left  corner
-                if (obj.getBoundingRect().top < 0 || obj.getBoundingRect().left < 0) {
-                    obj.top = Math.max(obj.top, obj.top - obj.getBoundingRect().top);
-                    obj.left = Math.max(obj.left, obj.left - obj.getBoundingRect().left);
+
+                if (obj.getTop() < 0) {
+                    obj.setTop(0);
                 }
-                // bot-right corner
-                if (obj.getBoundingRect().top + obj.getBoundingRect().height > obj.canvas.height || obj.getBoundingRect().left + obj.getBoundingRect().width > obj.canvas.width) {
-                    obj.top = Math.min(obj.top, obj.canvas.height - obj.getBoundingRect().height + obj.top - obj.getBoundingRect().top);
-                    obj.left = Math.min(obj.left, obj.canvas.width - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
+
+                if (obj.getWidth() > canvasWidth) {
+                    obj.setWidth(canvasWidth);
                 }
+
+                if (obj.getHeight() > canvasHeight) {
+                    obj.setHeight(canvasHeight);
+                }
+
+                console.log('scaling');
             },
             'object:selected': onObjectSelected,
             'selection:cleared': onSelectedCleared
@@ -126,17 +164,80 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
         });
         canvas.on('object:out', function(e) { //TO DO
         });
-        canvas.selection= false;
+        //canvas.selection = false;
 
         $('.language-control').change(function() { //TO DO
         });
 
+        lnY = new fabric.Line([0, canvas.height / 2, canvas.width, canvas.height / 2], {
+            "stroke": "#0006ff",
+            "strokeWidth": 2,
+            hasBorders: false,
+            hasControls: false,
+            hasRotatingPoint: false,
+            selectable: false,
+            visible: false
+        });
+        lnX = new fabric.Line([canvas.width / 2, 0, canvas.width / 2, canvas.height], {
+            "stroke": "#0006ff",
+            "strokeWidth": 2,
+            hasBorders: false,
+            hasControls: false,
+            hasRotatingPoint: false,
+            selectable: false,
+            visible: false
+        });
+
+        canvas.add(lnX);
+        canvas.add(lnY);
+
+        //function setStyle(object, styleName, value) {
+        var setStyle = function(object, styleName, value) {
+            if (object.setSelectionStyles && object.isEditing) {
+                var style = {};
+                style[styleName] = value;
+                object.setSelectionStyles(style);
+                object.renderCursorOrSelection();
+            } else {
+                object[styleName] = value;
+            }
+        }
+
+        var getStyle = function(object, styleName) {
+            return (object.getSelectionStyles && object.isEditing) ?
+                object.getSelectionStyles()[styleName] :
+                object[styleName];
+        }
+
         //$("body").on("click", ":not(canvas, #drawingArea, .canvas-container, div:first:#drawingArea)", function (event) {
-        $("body").on("click", function(event) {
+        $(document).on("mouseup", function(event) {
             if (!mov) {
-                //console.log("canvas deactivateAll ");
-                //canvas.deactivateAll().renderAll();
-                //onSelectedCleared();
+                var _deselect = false;
+                var _target = event.target;
+                if (event.target.id == "text-string") {
+                    _deselect = false;
+                } else if (_target.parentNode) {
+                    while (_target["parentNode"]) {
+                        if (_target["parentNode"].id == "texteditor" ||
+                            _target["parentNode"].id == "imageeditor" ||
+                            $(_target).hasClass("color-picker")) {
+                            console.log('_deselect > ');
+                            _deselect = false;
+                            break;
+                        }
+                        _target = _target["parentNode"];
+                        _deselect = true;
+                    }
+                }
+                if (_deselect) {
+                    var activeObject = canvas.getActiveObject();
+                    if (activeObject && activeObject.type === 'textbox') {
+                        activeObject.exitEditing();
+                    }
+                    canvas.renderAll();
+                    canvas.deactivateAll().renderAll();
+                    onSelectedCleared();
+                }
             }
         });
 
@@ -162,20 +263,20 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
             } else if ($that.data('value') == "greyscale") {
                 filter = new fabric.Image.filters.Grayscale();
             } else if ($that.data('value') == "lblurred") {
-                filter = new fabric.Image.filters.StackBlur(4);
-            } else if ($that.data('value') == "sblurred") {
                 filter = new fabric.Image.filters.StackBlur(10);
+            } else if ($that.data('value') == "sblurred") {
+                filter = new fabric.Image.filters.StackBlur(20);
             } else if ($that.data('value') == "bright") {
                 filter = new fabric.Image.filters.Brightness({
                     brightness: 50
                 });
             } else if ($that.data('value') == "lcontrast") {
                 filter = new fabric.Image.filters.Contrast({
-                    contrast: -60
+                    contrast: 15
                 });
             } else if ($that.data('value') == "scontrast") {
                 filter = new fabric.Image.filters.Contrast({
-                    contrast: -100
+                    contrast: 30
                 });
             }
             canvas.backgroundImage.filters = [filter];
@@ -205,10 +306,12 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                         scaleY: 1,
                         fontSize: 20,
                         fontWeight: '',
-                        padding: 10,
+                        padding: 5,
                         hasRotatingPoint: false
                     });
-                    textHeader.setControlsVisibility({'mtr': false});
+                    textHeader.setControlsVisibility({
+                        'mtr': false
+                    });
                     textHeader.textAlign = 'center';
                     canvas.add(textHeader);
                 } else if ($(this).attr('data-value') == 2) {
@@ -226,18 +329,21 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                         scaleY: 1,
                         fontWeight: '',
                         fontSize: 24,
-                        padding: 10,
+                        padding: 5,
                         hasRotatingPoint: false
                     });
-                    textBody.setControlsVisibility({'mtr': false});
+                    textBody.setControlsVisibility({
+                        'mtr': false
+                    });
                     textBody.textAlign = 'center';
                     canvas.add(textBody);
                 } else if ($(this).attr('data-value') == 3) {
                     if (textFooter != undefined) {
                         return;
                     }
-                    textFooter = new fabric.Textbox("- hey! footer here", {
-                        left: 300,
+                    textFooter = new fabric.Textbox("hey! footer here", {
+                        // left: 300,
+                        left: 160,
                         top: 280,
                         width: 150,
                         fontFamily: 'Arial',
@@ -248,11 +354,13 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                         fontWeight: '',
                         fontStyle: 'italic',
                         fontSize: 18,
-                        padding: 10,
+                        padding: 5,
                         hasRotatingPoint: false
                     });
-                    textFooter.setControlsVisibility({'mtr': false});
-                    textFooter.textAlign = 'right';
+                    textFooter.setControlsVisibility({
+                        'mtr': false
+                    });
+                    textFooter.textAlign = 'center';
                     canvas.add(textFooter);
                 }
                 $("#texteditor").css('display', 'none');
@@ -285,6 +393,7 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                 obj.left = Math.min(obj.left, obj.canvas.width - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
             }
         }
+
         $("#text-string").keyup(function() {
             var activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.type === 'textbox') {
@@ -330,13 +439,12 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
             }
         });
 
-        canvas.renderAll();
-
         $("#background .img-polaroid").click(function(e) {
             var el = e.target;
             $("#background .img-polaroid").removeClass("active");
             $(el).addClass("active");
             var design = $(this).attr("src");
+            design = design.replace("bg_thumb", "background");
             var sw = canvas.width;
             var sh = canvas.height;
             canvas.setBackgroundImage(design, canvas.renderAll.bind(canvas), {
@@ -371,7 +479,9 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                 sy = clipart.scaleY;
             }
             doing = true;
-            fabric.Image.fromURL(el.src, function(image) {
+            var pngElSrc = (el.src).replace("clipart_thumb", "clipart");
+            pngElSrc = pngElSrc.replace(".jpg", ".png");
+            fabric.Image.fromURL(pngElSrc, function(image) {
                 if (clipart != null) {
                     canvas.remove(clipart);
                 }
@@ -379,9 +489,8 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
                     left: left,
                     top: top,
                     angle: 0,
-                    padding: 10,
+                    padding: 5,
                     cornersize: 10,
-                    padding: 0,
                     hasRotatingPoint: true,
                     scaleX: sx,
                     scaleY: sy
@@ -433,23 +542,36 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
             }
         };
 
+        $('#background .img-polaroid').first().addClass("active");
+        $('#background .img-polaroid').first().trigger("click");
+        //$('.bg-filter .list-group div:nth-child(5)').addClass("active");
+        //$('.bg-filter .list-group div:nth-child(5)').trigger("click");
+        canvas.renderAll();
+
         // $(".dropdown-menu li a").click(function() {
         //     $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
         //     $(this).parents('li').addClass("active");
         // });
+        $("#font-family ~ ul>li a")
+            .click(function() {
+                $('#font-family.dropdown-toggle').html($(this).html().substring(0, 9) + '<span class="caret" style="margin-left: 7px;"></span>');
+                $("#font-family ~ ul>li a").removeClass("active");
+                $(this).addClass("active");
+                //.dropdown-menu>li>a
+            });
 
-        $("#font-family a").click(function() {
-            $('#font-family .dropdown-toggle').html($(this).html() + '<span class="caret"></span>');
-        });
-
-        $("#font-size a").click(function() {
-            $('#font-size .dropdown-toggle').html($(this).html() + '<span class="caret"></span>');
-        });
+        $("#font-size ~ ul>li a")
+            .click(function() {
+                $('#font-size.dropdown-toggle').html($(this).html() + '<span class="caret" style="margin-left: 6px;"></span>');
+            });
 
         $("#text-bold").click(function() {
             var activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.type === 'textbox') {
-                activeObject.fontWeight = (activeObject.fontWeight == 'bold' ? '' : 'bold');
+                //setStyle(activeObject, 'fontWeight', isBold ? '' : 'bold');
+                var isBold = getStyle(activeObject, 'fontWeight') === 'bold';
+                setStyle(activeObject, 'fontWeight', isBold ? '' : 'bold');
+                //activeObject.fontWeight = (activeObject.fontWeight == 'bold' ? '' : 'bold');
                 canvas.renderAll();
             }
         });
@@ -469,10 +591,13 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
         // });
         $("#text-underline").click(function() {
             var activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                activeObject.textDecoration = (activeObject.textDecoration == 'underline' ? '' : 'underline');
-                canvas.renderAll();
-            }
+            var isUnderline = (getStyle(obj, 'textDecoration') || '').indexOf('underline') > -1;
+            setStyle(obj, 'textDecoration', isUnderline ? '' : 'underline');
+            canvas.renderAll();
+            // if (activeObject && activeObject.type === 'textbox') {
+            //     activeObject.textDecoration = (activeObject.textDecoration == 'underline' ? '' : 'underline');
+            //     canvas.renderAll();
+            // }
         });
         $("#text-left").click(function() {
             var activeObject = canvas.getActiveObject();
@@ -497,18 +622,22 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
         });
         $("#font-family").change(function() {
             var activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                activeObject.fontFamily = this.value;
-                canvas.renderAll();
-            }
+            setStyle(activeObject, 'fontFamily', this.value);
+            canvas.renderAll();
+            // if (activeObject && activeObject.type === 'textbox') {
+            //     activeObject.fontFamily = this.value;
+            //     canvas.renderAll();
+            // }
         });
         $('#text-bgcolor').miniColors({
             change: function(hex, rgb) {
                 var activeObject = canvas.getActiveObject();
-                if (activeObject && activeObject.type === 'textbox') {
-                    activeObject.backgroundColor = this.value;
-                    canvas.renderAll();
-                }
+                setStyle(activeObject, 'backgroundColor', this.value);
+                canvas.renderAll();
+                // if (activeObject && activeObject.type === 'textbox') {
+                //     activeObject.backgroundColor = this.value;
+                //     canvas.renderAll();
+                // }
             },
             open: function(hex, rgb) { //
             },
@@ -518,10 +647,13 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
         $('#text-fontcolor').miniColors({
             change: function(hex, rgb) {
                 var activeObject = canvas.getActiveObject();
-                if (activeObject && activeObject.type === 'textbox') {
-                    activeObject.fill = this.value;
-                    canvas.renderAll();
-                }
+                setStyle(activeObject, 'fill', this.value);
+                canvas.renderAll();
+
+                // if (activeObject && activeObject.type === 'textbox') {
+                //     activeObject.fill = this.value;
+                //     canvas.renderAll();
+                // }
             },
             open: function(hex, rgb) { //
             },
@@ -542,6 +674,8 @@ $(document).on("shown.bs.dropdown", ".dropdown", function() {
             }
         });
         $(".clearfix button,a").tooltip();
+        window.setStyle = setStyle;
+        window.getStyle = getStyle;
     });
 
 function onObjectSelected(e) {
@@ -574,18 +708,22 @@ function onSelectedCleared(e) {
 
 function setFont(font) {
     var activeObject = canvas.getActiveObject();
-    if (activeObject && activeObject.type === 'textbox') {
-        activeObject.fontFamily = font;
-        canvas.renderAll();
-    }
+    this.setStyle(activeObject, 'fontFamily', font);
+    canvas.renderAll();
+    // if (activeObject && activeObject.type === 'textbox') {
+    //     activeObject.fontFamily = font;
+    //     canvas.renderAll();
+    // }
 }
 
 function setFontSize(size) {
     var activeObject = canvas.getActiveObject();
-    if (activeObject && activeObject.type === 'textbox') {
-        activeObject.fontSize = size;
-        canvas.renderAll();
-    }
+    this.setStyle(activeObject, 'fontSize', size);
+    canvas.renderAll();
+    // if (activeObject && activeObject.type === 'textbox') {
+    //     activeObject.fontSize = size;
+    //     canvas.renderAll();
+    // }
 }
 
 function removeWhite() {

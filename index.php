@@ -36,6 +36,11 @@
     <link href="css/font-awesome.css" rel="stylesheet" />
 
     <style type="text/css">
+
+        html, body {
+            height: 100%;
+        }
+
         body {
             background: url(img/confectionary.png) repeat;
         }
@@ -50,14 +55,43 @@
             src: url('fonts/Mangal.ttf') format('truetype');
         }
 
-        .navbar-custom {
-            background-color: #000000;
+        @font-face {
+            font-family: 'Champagne';
+            src: url('fonts/Champagne.ttf') format('truetype');
         }
 
-        .preview{
-          min-width: 992px;
-          width: 992px;
-          margin: 0px auto;
+        @font-face {
+            font-family: 'Tusj';
+            src: url('fonts/Tusj.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            src: url('fonts/Oswald.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'RougeScript';
+            src: url('fonts/RougeScript.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Seasrn';
+            src: url('fonts/Seasrn.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Capture';
+            src: url('fonts/Capture.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Walterturncoat';
+            src: url('fonts/Walterturncoat.ttf') format('truetype');
+        }
+
+        .navbar-custom {
+            background-color: #000000;
         }
 
         .color-preview {
@@ -84,24 +118,37 @@
             font-family: "Aclonica";
         }
 
+        .Champagne{
+            font-family: "Champagne";
+            font-size: 18px;
+        }
+
+        .Tusj{
+            font-family: "Tusj";
+        }
+
+        .Oswald{
+            font-family: "Oswald";
+        }
+
+        .RougeScript{
+            font-family: "RougeScript";
+        }
+
+        .Seasrn{
+            font-family: "Seasrn";
+        }
+
+        .Capture{
+            font-family: "Capture";
+        }
+
+        .Walterturncoat{
+            font-family: "Walterturncoat";
+        }
+
         .Mangal {
             font-family: "Mangal";
-        }
-
-        .Aldrich{
-            font-family: "Aldrich";
-        }
-
-        .EB-Garamond{
-            font-family: "EB Garamond";
-        }
-
-        .Averia-Sans-Libre{
-            font-family: "Averia Sans Libre";
-        }
-
-        .Merienda-One{
-            font-family: "Merienda One";
         }
 
         .Arial {
@@ -114,10 +161,6 @@
 
         .MyriadPro {
             font-family: "Myriad Pro";
-        }
-
-        .Delicious {
-            font-family: "Delicious";
         }
 
         .Verdana {
@@ -136,20 +179,12 @@
             font-family: "Comic Sans MS";
         }
 
-        .Impact {
-            font-family: "Impact";
-        }
-
         .Monaco {
             font-family: "Monaco";
         }
 
         .Optima {
             font-family: "Optima";
-        }
-
-        .HoeflerText {
-            font-family: "Hoefler Text";
         }
 
         .Plaster {
@@ -201,6 +236,13 @@
 
         .layoutThumbs .list-group-item:focus, .layoutThumbs .list-group-item:hover {
             background: #ffffff;
+        }
+
+        .layoutThumbs .list-group-item{
+          padding: 0px;
+          border: none;
+          border-top-left-radius: 0px;
+          border-top-right-radius: 0px;
         }
 
         .well.thumbs.backgrounds{
@@ -298,31 +340,25 @@
         }
 
         .img-art {
-            /*padding: 4px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);*/
+
         }
 
         .bg-thumbnail {
-            padding: 4px;
+            padding: 2px;
             margin-top: 2px;
             margin-bottom: 2px;
-            /*background-color: #fff;
-            border: 1px solid #ccc;
-            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);*/
             cursor:pointer;
-            height: 90px;
+            height: 110px;
             width: 100%;
         }
 
         .bg-thumbnail.active {
-            background-color: #0088cc;
-            border: 2px solid #337ab7;
+            /*background-color: #0088cc;*/
+            border: 4px solid #337ab7;
+        }
+
+        .img-thumbnail{
+            padding: 0px;
         }
 
         .img-thumbnail.active {
@@ -342,7 +378,10 @@
         }
 
         .navbar-right {
-            margin-top: 5px;
+          margin-top: 5px;
+          float: right!important;
+          margin-right: -15px;
+          margin-bottom: 0px;
         }
 
         .fa {
@@ -365,6 +404,16 @@
 
         .bg-filter .btn-group>.btn {
             background: #ffffff;
+        }
+
+        .bg-filter .list-group h5 {
+          clear: right;
+          margin-right: 0px;
+          float: left;
+          margin-top: 6px;
+          margin-left: 2px;
+          font-size: 0.85em;
+          font-weight: 500;
         }
 
         #login-dp {
@@ -397,6 +446,10 @@
             margin-bottom: 10px;
         }
 
+        #font-family {
+          padding-right: 2px;
+        }
+
         .btn-fb {
             color: #fff;
             background-color: #3b5998;
@@ -425,20 +478,22 @@
         .left-pane{
             padding-left:10px;
             /*padding-right:10px;*/
-            width: 24%;
-            margin: 0px 0px 0px 19px;
+            width: 240px;
+            margin: 0px 0px 0px 0px;
         }
 
         .center-pane {
             padding-left:0px;
             padding-right:0px;
             min-width: 500px;
+            width:480px;
         }
 
         .right-pane {
           padding-left: 0px;
           padding-right: 0px;
           min-width: 166px;
+          width: 166px;
         }
 
         .dropdown-menu {
@@ -535,7 +590,7 @@
         {
             -webkit-box-shadow: none;
             box-shadow: none;
-            max-width: 80px;
+            /*max-width: 80px;*/
             margin-right: -2px;
             background: #DDDDDD;
         }
@@ -602,8 +657,8 @@
         }
 
         .img-art label img{
-            height: 64px;
-            width: 64px;
+            height: 34px;
+            width: 34px;
             transition-duration: 0.2s;
             transform-origin: 50% 50%;
         }
@@ -670,10 +725,12 @@
           border-top: 1px solid #e5e5e5;
           margin-top: 30px;
         }
+
         .container{
-          width: 100%;
+          //width: 100%;
           min-height: 500px;
           height: 100%;
+          width: 992px !important;
         }
 
         /*  */
@@ -685,8 +742,15 @@
           margin-top: 10px;
           margin-bottom: 10px;
         }
+
         .dropdown-menu>li>a {
             color:#428bca;
+        }
+
+        .dropdown-menu>li>*:active {
+          border: #074e90 solid 2px;
+          margin-left: 2px;
+          margin-right: 2px;
         }
         .dropdown ul.dropdown-menu {
             border-radius:4px;
@@ -714,15 +778,43 @@
             right: 14px;
             z-index: 9;
         }
+
+        #texteditor>.btn {
+            padding: 6px 10px;
+        }
+
+        .preview{
+          width: 990px;
+          margin: 0px auto;
+        }
+
+        .i {
+            width: 22px;
+            height: 23px;
+            display: block;
+            background: url(img/icons.png) no-repeat;
+        }
+
+        .i-send-backward {
+            background-position: -80px 0;
+        }
+
+        .i-bring-foreward {
+            background-position: -54px 0;
+        }
+
+        .navbar-header{
+            float: left;
+        }
     </style>
 </head>
 
-<body class="preview">
+<body>
 
   <div id="loadingDiv">
     <span class="loadingDiv-text"><br>please wait .... </span>
   </div>
-    <div class="container-fixed">
+    <div class="container-fixed preview">
           <nav class="navbar navbar-default">
               <div class="row custom-row-padding">
                   <!-- Brand and toggle get grouped for better mobile display -->
@@ -742,18 +834,18 @@
                               </button>
                           </p>
                       </li>
-                      <li>
+                      <!-- <li>
                           <p class="navbar-default navbar-right">
                               <a class="btn btn-block btn-social btn-sm btn-facebook" style="display:none;" onclick="loginApp()">
                                   <i class="fa fa-facebook"></i>Sign in with Facebook</a>
                           </p>
-                      </li>
+                      </li> -->
                   </ul>
               </div>
           </nav>
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-md-offset-1 left-pane">
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-xs-3 col-xs-offset-1 left-pane">
                     <div class="tabbable">
                         <!-- Only required for left/right tabs -->
                         <ul class="nav nav-tabs custom-nav-margin-bottom">
@@ -766,19 +858,19 @@
                                 <div class="well thumbs backgrounds">
                                   <h5 style="font-size:12px;margin-top:0px;color:#7af;">Select a background image</h5>
                                   <div class="panel-body">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image1.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image7.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image8.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image9.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image2.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image3.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image4.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image5.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image6.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image5.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image6.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image5.jpg">
-                                    <img class="img-polaroid bg-thumbnail" src="img/image6.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/31592-FX-6-0-12-6-8-0.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/38396-FX-6-0-0-0-6-0.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/31033851_d0b396825e_b.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/202796162_f433aefa7a_b.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/1801-colored-pencils-forming-a-circle-pv.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/2181-closeup-of-frozen-water-pv.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/9093-a-town-street-during-a-snowstorm-pv.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/9273-wind-turbines-in-winter-pv.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/10691-a-snowflake-background-pv.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/18293-FX-6-0-12-6-8-0.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/27219-FX-6-0-12-6-8-0.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/32288-FX-6-0-4-0-0-0.jpg">
+                                    <img class="img-polaroid bg-thumbnail" src="bg_thumb/1755-magnifying-glass-on-a-white-background-pv.jpg">
                                   </div>
                                 </div>
                                 <!-- <hr>
@@ -788,7 +880,8 @@
                               <div class="well thumbs">
                               <h5 style="font-size:12px;margin-top:0px;color:#7af;">Select any template below</h5>
                               <div class="panel-body">
-                                <img click="getTemplate(1)" class="img-polaroid bg-thumbnail" src="img/image1.jpg">
+                                <span>no template defined </span>
+                                <!-- <img click="getTemplate(1)" class="img-polaroid bg-thumbnail" src="img/image1.jpg">
                                 <img click="getTemplate(2)" class="img-polaroid bg-thumbnail" src="img/image7.jpg">
                                 <img click="getTemplate(3)" class="img-polaroid bg-thumbnail" src="img/image8.jpg">
                                 <img click="getTemplate(4)" class="img-polaroid bg-thumbnail" src="img/image2.jpg">
@@ -799,29 +892,36 @@
                                 <img click="getTemplate(9)" class="img-polaroid bg-thumbnail" src="img/image5.jpg">
                                 <img click="getTemplate(10)" class="img-polaroid bg-thumbnail" src="img/image6.jpg">
                                 <img click="getTemplate(11)" class="img-polaroid bg-thumbnail" src="img/image5.jpg">
-                                <img click="getTemplate(12)" class="img-polaroid bg-thumbnail" src="img/image6.jpg">
+                                <img click="getTemplate(12)" class="img-polaroid bg-thumbnail" src="img/image6.jpg"> -->
                               </div>
                             </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 center-pane">
+                <div class="col-xs-5 center-pane">
                     <div align="center" style="min-height: 36px;">
                         <div class="row">
-                            <div class="btn-group inline pull-left" id="texteditor" style="display:none;left:35px;">
+                            <div class="btn-group inline pull-left" id="texteditor" style="display:none;left:70px;top: -5px;">
                                 <div class="btn-group">
                                       <button id="font-family" class="btn dropdown-toggle override-dropdown-toggle" data-toggle="dropdown" type="button" title="Font Style">
-                                          Arial<span class="caret"></span>
+                                          Arial<span class="caret" style="margin-left: 7px;"></span>
                                       </button>
                                       <ul class="dropdown-menu" role="menu" aria-labelledby="font-family-X">
                                           <li><a tabindex="-1" href="#" onclick="setFont('Arial');" class="Arial">Arial</a></li>
                                           <li><a tabindex="-1" href="#" onclick="setFont('Aclonica');" class="Aclonica">Aclonica</a></li>
+                                          <li><a tabindex="-1" href="#" onclick="setFont('Champagne');" class="Champagne">Champagne</a></li>
+                                          <li><a tabindex="-1" href="#" onclick="setFont('Tusj');" class="Tusj">Tusj</a></li>
+                                          <li><a tabindex="-1" href="#" onclick="setFont('Oswald');" class="Oswald">Oswald</a></li>
+                                          <li><a tabindex="-1" href="#" onclick="setFont('RougeScript');" class="RougeScript">RougeScript</a></li>
+                                          <li><a tabindex="-1" href="#" onclick="setFont('Seasrn');" class="Seasrn">Seasrn</a></li>
+                                          <li><a tabindex="-1" href="#" onclick="setFont('Capture');" class="Capture">Capture</a></li>
+                                          <li><a tabindex="-1" href="#" onclick="setFont('Walterturncoat');" class="Walterturncoat">Walterturncoat</a></li>
                                       </ul>
                                 </div>
                                 <div class="btn-group">
                                       <button id="font-size" class="btn dropdown-toggle override-dropdown-toggle" data-toggle="dropdown" type="button" title="Font Size">
-                                          24<span class="caret"></span>
+                                          24<span class="caret" style="margin-left: 6px;"></span>
                                       </button>
                                       <ul class="dropdown-menu" role="menu" aria-labelledby="font-size-X">
                                           <li><a tabindex="-1" href="#" onclick="setFontSize(14);" class="fontSize">14</a></li>
@@ -865,22 +965,27 @@
                                     <input type="hidden" id="text-fontcolor" class="color-picker" size="7" value="#000000">
                                 </a>
 
+                                <!-- <a class="btn custom-bg" href="#" rel="tooltip" data-placement="top" data-original-title="Text Background">
+                                    <input type="hidden" id="text-bgcolor" class="color-picker" size="7" value="#ffffff">
+                                </a> -->
+
+
                                 <!-- a class="btn custom-bg" href="#" rel="tooltip" data-placement="top" data-original-title="Font Border Color">
                                     <input type="hidden" id="text-strokecolor" class="color-picker" size="7" value="#000000">
                                 </a -->
 
                                 <!--- Background <input type="hidden" id="text-bgcolor" class="color-picker" size="7" value="#ffffff"> --->
                             </div>
-                            <div class="pull-right" align="" id="imageeditor" style="display:none;position: absolute;">
-                                <div class="btn-group" style="left: 185px;">
-                                    <button class="btn" id="bring-to-front" title="Bring to Front">
-                                            <i class="fa fa-fast-backward rotate" aria-hidden="true"></i>
+                            <div class="pull-right" align="" id="imageeditor" style="display:none;position: absolute; ">
+                                <div class="btn-group" style="left: 185px;top: -5px;">
+                                    <button class="btn" id="bring-to-front" title="Bring Frontward">
+                                            <i class="i i-bring-foreward" aria-hidden="true"></i>
                                     </button>
-                                    <button class="btn" id="send-to-back" title="Send to Back">
-                                            <i class="fa fa-fast-forward rotate" aria-hidden="true"></i>
+                                    <button class="btn" id="send-to-back" title="Send Backward">
+                                            <i class="i i-send-backward" aria-hidden="true"></i>
                                     </button>
                                     <button id="remove-selected" class="btn" title="Delete selected item">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                            <i class="fa fa-trash" aria-hidden="true" style="height: 20px;font-size: 15px;"></i>
                                     </button>
                                 </div>
                             </div>
@@ -888,11 +993,11 @@
                     </div>
                     <!--	EDITOR      -->
                     <!-- 480 x 320 facebook posting-->
-                    <div style="background-color: #ffffff; position: relative; left:25%px; top: 10px; height:320px;width:480px;">
-                        <div id="drawingArea" style="position: absolute;top:0px;left:0px;z-index: 10;width: 483px; height:323px;backgorund:#002200;border-style: outset;">
+                    <!-- <div style="background-color: #ffffff; position: relative; top: 10px; height:320px;width:480px;"> -->
+                        <div id="drawingArea" style="z-index: 10;border: #cecece dotted 3px;background-color: #ffffff;height:326px;width:486px;">
                             <canvas id="tc" width="480" height="320" class="hover"></canvas>
                         </div>
-                    </div>
+                    <!-- </div> -->
 
                       <div class="well text-edit">
                         <!--span class="text-left" style="margin:0 0 5px;"><strong>Change Language</strong></span>
@@ -1032,7 +1137,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-2 right-pane">
+                <div class="col-xs-2 right-pane">
                   <div class="panel panel-primary">
                         <div class="panel-body">
                           <h5 style="font-size:12px;margin-top:0px;margin-bottom:0px;color:#7af;">Select to Insert Texts</h5>
@@ -1085,7 +1190,7 @@
                                   margin-top: 6px;
                                   margin-left: 2px;
                                   background-color: #ffffff;
-                                  font-size: 0.9em;
+                                  font-size: 0.85em;
                                   font-weight: 500;">None
                               </h5>
                               <span class="caret" style="float: right;
@@ -1099,87 +1204,32 @@
                                 max-height:200px;">
                               	<div class="list-group-item active" data-value="none" style="height: 46px;">
                                   <img src="img/icons/none.png" class="img-circle" style="float: left;margin: -2px 5px 0px -5px;height:30px;width:30px;">
-                                  <h5 style="
-                                      clear: right;
-                                      margin-right: 0px;
-                                      float: left;
-                                      margin-top: 6px;
-                                      margin-left: 2px;
-                                      font-size: 0.9em;
-                                      font-weight: 500;">None
+                                  <h5>None
                                   </h5>
                               	</div>
                                 <div class="list-group-item" data-value="lblurred" style="height: 46px;">
                                   <img src="img/icons/lblur.png" class="img-circle" style="float: left;margin: -2px 5px 0px -5px;height:30px;width:30px;">
-                                  <h5 style="
-                                      clear: right;
-                                      margin-right: 0px;
-                                      float: left;
-                                      margin-top: 6px;
-                                      margin-left: 2px;
-                                      font-size: 0.9em;
-                                      font-weight: 500;">Normal Blur
-                                  </h5>
+                                  <h5>Normal Blur</h5>
                               	</div>
                                 <div class="list-group-item" data-value="sblurred" style="height: 46px;">
                                   <img src="img/icons/sblur.png" class="img-circle" style="float: left;margin: -2px 5px 0px -5px;height:30px;width:30px;">
-                                  <h5 style="
-                                      clear: right;
-                                      margin-right: 0px;
-                                      float: left;
-                                      margin-top: 6px;
-                                      margin-left: 2px;
-                                      font-size: 0.9em;
-                                      font-weight: 500;">Strong Blur
-                                  </h5>
+                                  <h5>Strong Blur</h5>
                               	</div>
                                 <div class="list-group-item" data-value="bright" style="height: 46px;">
                                   <img src="img/icons/bright.png" class="img-circle" style="float: left;margin: -2px 5px 0px -5px;height:30px;width:30px;">
-                                  <h5 style="
-                                      clear: right;
-                                      margin-right: 0px;
-                                      float: left;
-                                      margin-top: 6px;
-                                      margin-left: 2px;
-                                      font-size: 0.9em;
-                                      font-weight: 500;">Bright
-                                  </h5>
+                                  <h5>Bright</h5>
                               	</div>
                                 <div class="list-group-item" data-value="lcontrast" style="height: 46px;">
                                   <img src="img/icons/lcontrast.png" class="img-circle" style="float: left;margin: -2px 5px 0px -5px;height:30px;width:30px;">
-                                  <h5 style="
-                                      clear: right;
-                                      margin-right: 0px;
-                                      float: left;
-                                      margin-top: 6px;
-                                      margin-left: 2px;
-                                      font-size: 0.9em;
-                                      font-weight: 500;">Light Contrast
-                                  </h5>
+                                  <h5>Light Contrast</h5>
                               	</div>
                                 <div class="list-group-item" data-value="scontrast" style="height: 46px;">
                                   <img src="img/icons/scontrast.png" class="img-circle" style="float: left;margin: -2px 5px 0px -5px;height:30px;width:30px;">
-                                  <h5 style="
-                                      clear: right;
-                                      margin-right: 0px;
-                                      float: left;
-                                      margin-top: 6px;
-                                      margin-left: 2px;
-                                      font-size: 0.9em;
-                                      font-weight: 500;">Contrast
-                                  </h5>
+                                  <h5>Contrast</h5>
                               	</div>
                                 <div class="list-group-item" data-value="greyscale" style="height: 46px;">
                                   <img src="img/icons/grayscale.png" class="img-circle" style="float: left;margin: -2px 5px 0px -5px;height:30px;width:30px;">
-                                  <h5 style="
-                                      clear: right;
-                                      margin-right: 0px;
-                                      float: left;
-                                      margin-top: 6px;
-                                      margin-left: 2px;
-                                      font-size: 0.9em;
-                                      font-weight: 500;">Grayscale
-                                  </h5>
+                                  <h5>Grayscale</h5>
                               	</div>
                               </div>
                             <!-- <ul class="dropdown-menu" role="menu">
@@ -1201,43 +1251,73 @@
                                   <li class="img-art">
                                     <input type="checkbox" id="cb1">
                                     <label for="cb1">
-                                      <img src="img/daisy-flower-100x100.png">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/smile.png">
+                                    </label>
+                                  </li>
+                                  <li class="img-art">
+                                    <input type="checkbox" id="cb21">
+                                    <label for="cb21">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/star2.png">
+                                    </label>
+                                  </li>
+                                  <li class="img-art">
+                                    <input type="checkbox" id="cb22">
+                                    <label for="cb22">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/oriental.png">
                                     </label>
                                   </li>
                                   <li class="img-art">
                                     <input type="checkbox" id="cb2">
                                     <label for="cb2">
-                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="img/thumbs-up-clipart-100x100.png">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/dead-min.jpg">
                                     </label>
                                   </li>
                                   <li class="img-art">
                                     <input type="checkbox" id="cb3">
                                     <label for="cb3">
-                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="img/newbie-mouse-100x100.png">
-                                    </label>
-                                  </li>
-                                  <li class="img-art">
-                                    <input type="checkbox" id="cb4">
-                                    <label for="cb4">
-                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="data:image/jpeg;base64,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">
-                                    </label>
-                                  </li>
-                                  <li class="img-art">
-                                    <input type="checkbox" id="cb5">
-                                    <label for="cb5">
-                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="data:image/jpeg;base64,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">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/eh-min.jpg">
                                     </label>
                                   </li>
                                   <li class="img-art">
                                     <input type="checkbox" id="cb6">
                                     <label for="cb6">
-                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="data:image/jpeg;base64,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">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/follow_the_sign-min.jpg">
                                     </label>
                                   </li>
                                   <li class="img-art">
                                     <input type="checkbox" id="cb7">
                                     <label for="cb7">
-                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="data:image/jpeg;base64,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">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/heart_PNG702-min.jpg">
+                                    </label>
+                                  </li>
+                                  <li class="img-art">
+                                    <input type="checkbox" id="cb8">
+                                    <label for="cb8">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/in_love-min.jpg">
+                                    </label>
+                                  </li>
+                                  <li class="img-art">
+                                    <input type="checkbox" id="cb9">
+                                    <label for="cb9">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/make_fun-min.jpg">
+                                    </label>
+                                  </li>
+                                  <li class="img-art">
+                                    <input type="checkbox" id="cb10">
+                                    <label for="cb10">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/to_sulk-min.jpg">
+                                    </label>
+                                  </li>
+                                  <li class="img-art">
+                                    <input type="checkbox" id="cb11">
+                                    <label for="cb11">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/you_like_my_teeths-min.jpg">
+                                    </label>
+                                  </li>
+                                  <li class="img-art">
+                                    <input type="checkbox" id="cb12">
+                                    <label for="cb12">
+                                      <img style="cursor:pointer;" class="img-art img-thumbnail" src="clipart_thumb/you_make_me_hurt-min.jpg">
                                     </label>
                                   </li>
                                 </ul>
@@ -1348,8 +1428,8 @@
             $.ajax({
                 type: "POST",
                 //url: "http://localhost/~user/posta/public/initApp",
-                //url: "http://diy-clientfeeds.rhcloud.com/initApp",
-                url: "/~user/slim/initApp",
+                url: "http://diy-clientfeeds.rhcloud.com/initApp",
+                //url: "/~user/slim/initApp",
                 data: userdata,
                 dataType: "application/x-www-form-urlencoded",
                 //Do not cache the page
@@ -1406,8 +1486,8 @@
                         //dataType: "text",
                         data: _reqData,
                         cache: false,
-                        url: "/~user/slim/publish",
-                        //url: "http://diy-clientfeeds.rhcloud.com/publish",
+                        //url: "/~user/slim/publish",
+                        url: "http://diy-clientfeeds.rhcloud.com/publish",
                         success: function(data) {
                             if(data.status == "success")
                             {
